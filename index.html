@@ -26,30 +26,16 @@
         const form = document.querySelector('form')
         const messages = document.querySelector('#messages')
         const sendMessage = (e) => {
-          e.preventDefault()
-          const messageInput = document.querySelector('#m')
-          socket.emit('chat message', messageInput.value)
-          messageInput.value = ''
+            e.preventDefault()
+            const messageInput = document.querySelector('#m')
+            socket.emit('chat message', messageInput.value)
+            messageInput.value = ''
         }
 
-        const addMessageToChat = (msg) => {
-          const listMessage = document.createElement('li')
-          listMessage.innerText = msg
-          messages.appendChild(listMessage)
-        };
-        
-        const broadcastParticipantState = (state) =>{
-          let msg = !!state ? 'a user has connected to the chat' : 'a user has disconnected from the chat';
-          addMessageToChat(msg);
-        };
-
         socket.on('chat message', msg => {
-          addMessageToChat(msg);
-        });
-
-        socket.on('user_state', state => {
-          console.log(`State ${state}`);
-          broadcastParticipantState(state);
+            const listMessage = document.createElement('li')
+            listMessage.innerText = msg
+            messages.appendChild(listMessage)
         })
     </script>
   </body>

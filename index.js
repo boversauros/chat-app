@@ -9,14 +9,13 @@ app.get('/', (req, res) => {
 })
 
 io.on('connection', (socket) => {
-    io.emit('user_state', 1);
-
+    console.log('a user connected')
     socket.on('chat message', msg => {
         io.emit('chat message', msg)
-    });
+    })
 
     socket.on('disconnect', () =>{
-        io.emit('user_state', 0);
+        console.log('user disconnected')
     })
 })
 
